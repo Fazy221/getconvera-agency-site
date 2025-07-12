@@ -76,9 +76,19 @@ a {
   &:active {
     color: var(--primary-color);
   }
+  &:link {
+    color: var(--primary-color);
+  }
   &:hover {
     opacity: 0.6;
   }
+}
+/* For dynamically active on section scrollvoer */
+nav a {
+  transition: color 0.15s ease-in-out, opacity 0.15s ease-in-out;
+}
+nav a.active {
+  color: var(--primary-color);
 }
 
 h1,
@@ -196,7 +206,8 @@ header {
 #site-header.nav--scrolled .nav__container {
   padding: 1.2rem 3.2rem;
   border-radius: 20rem;
-  background: rgba(0, 1, 2, 0.75); /* semi-opaque */
+  /* background: rgba(0, 1, 2, 0.75);  */
+  background: rgba(255, 255, 255, 0.05); 
   backdrop-filter: blur(0.6rem); /* glassy */
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 2rem rgba(0, 0, 0, 0.35);
@@ -656,14 +667,14 @@ header {
     display: flex;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 2.5rem;
-    padding: 2rem;
+    padding: 2rem 1rem 0 2rem;
 
     .process__step__inner-block {
       display: flex;
       flex-direction: column;
       height: fit-content;
       gap: 1.6rem;
-      padding: 0 0 5.4rem 0;
+      padding: 0 0 7.4rem 0;
       position: relative;
       overflow: hidden;
       .process__step__inner-icon {
@@ -681,7 +692,7 @@ header {
       }
       h1 {
         position: absolute;
-        bottom: -4rem;
+        bottom: -5rem;
         right: 0;
         font-size: 10rem;
         color: var(--primary-color);

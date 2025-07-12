@@ -1,6 +1,6 @@
 "use strict";
 
-// ---- Navbar Click to scroll ---- 
+// ---- Navbar Click to scroll ----
 // Reusable ease (t = 0..1)
 const easeInOutQuad = (t) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
 
@@ -30,56 +30,78 @@ document.querySelectorAll('a.scroll-link[href^="#"]').forEach((link) => {
   });
 });
 
-// ---- Navbar scroll to trigger changes ---- 
-const header = document.getElementById('site-header');
-const SCROLL_TRIGGER = 80;             // px from top before state change
+// ---- Navbar scroll to trigger changes ----
+const header = document.getElementById("site-header");
+const SCROLL_TRIGGER = 80; // px from top before state change
 
-window.addEventListener('scroll', () => {
-  header.classList.toggle('nav--scrolled', window.scrollY > SCROLL_TRIGGER);
+window.addEventListener("scroll", () => {
+  header.classList.toggle("nav--scrolled", window.scrollY > SCROLL_TRIGGER);
 });
 
 /* reveal.js  – drop this just before </body> */
 (() => {
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prefersReduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
   if (prefersReduced) {
-    document.querySelectorAll('.reveal').forEach(el => el.classList.add('reveal--in'));
+    document
+      .querySelectorAll(".reveal")
+      .forEach((el) => el.classList.add("reveal--in"));
     return;
   }
 
   /* --- tweakables --- */
-  const BASE_DELAY   = window.innerWidth < 600 ? 40 : 60; // ms
-  const MAX_STAGGER  = 6;                                 // after this, show immediately
+  const BASE_DELAY = window.innerWidth < 600 ? 40 : 60; // ms
+  const MAX_STAGGER = 6; // after this, show immediately
 
   let currentSection = null;
-  let seqIndex       = 0;
+  let seqIndex = 0;
 
   const io = new IntersectionObserver(
-    entries => entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
+    (entries) =>
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
 
-      const el       = entry.target;
-      const section  = el.closest('section,[id="hero"]') || document.body;
+        const el = entry.target;
+        const section = el.closest('section,[id="hero"]') || document.body;
 
-      if (section !== currentSection) {          // new section → reset
-        currentSection = section;
-        seqIndex = 0;
-      }
+        if (section !== currentSection) {
+          // new section → reset
+          currentSection = section;
+          seqIndex = 0;
+        }
 
-      const delay = Math.min(seqIndex, MAX_STAGGER) * BASE_DELAY;
-      setTimeout(() => el.classList.add('reveal--in'), delay);
-      seqIndex++;
+        const delay = Math.min(seqIndex, MAX_STAGGER) * BASE_DELAY;
+        setTimeout(() => el.classList.add("reveal--in"), delay);
+        seqIndex++;
 
-      io.unobserve(el);
-    }),
-    { threshold: 0.15, rootMargin: '0px 0px -5% 0px' }    // tiny pre-load bump
+        io.unobserve(el);
+      }),
+    { threshold: 0.15, rootMargin: "0px 0px -5% 0px" } // tiny pre-load bump
   );
 
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 })();
 
-var indian = 'pajeet';
-function shittingToiler() {
-  var indian = 'saaar';
-  console.log(indian);
-}
-shittingToiler();
+// For dynamically active on section scrollvoer
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll("nav a");
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.id;
+      const navLink = document.querySelector(`nav a[href="#${id}"]`);
+
+      if (entry.isIntersecting) {
+        navLinks.forEach((link) => link.classList.remove("active"));
+        if (navLink) navLink.classList.add("active");
+      }
+    });
+  },
+  {
+    threshold: 0.2, // Trigger when 50% of the section is visible
+  }
+);
+
+sections.forEach((section) => observer.observe(section));
