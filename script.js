@@ -105,3 +105,12 @@ const observer = new IntersectionObserver(
 );
 
 sections.forEach((section) => observer.observe(section));
+
+// Scroll to call section from hero btn
+document.querySelectorAll("[data-scroll-to]").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const targetSelector = btn.getAttribute("data-scroll-to");
+    smoothScrollTo(targetSelector, 1200, 70); // adjust duration & offset if needed
+  });
+});

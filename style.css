@@ -73,12 +73,12 @@ p {
 }
 a {
   text-decoration-line: none;
-  &:active {
+  /* &:active {
     color: var(--primary-color);
   }
   &:link {
     color: var(--primary-color);
-  }
+  } */
   &:hover {
     opacity: 0.6;
   }
@@ -437,9 +437,16 @@ header {
   display: flex;
   flex: 1;
   height: 100%;
-  background: url("./assets/hero__target-brand-block-placeholder.png");
+  justify-content: center;
+  align-items: center;
+  /* background: url("./assets/hero__target-brand-block-placeholder.png"); */
+  background: #1A1A1A;
   border-top-right-radius: 1.6rem;
   border-bottom-right-radius: 1.6rem;
+  img {
+    width: 34rem;
+    height: 16.5rem;
+  }
 }
 .hero__partners-strip {
   overflow: hidden;
