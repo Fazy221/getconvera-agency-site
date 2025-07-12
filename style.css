@@ -197,9 +197,9 @@ header {
   padding: 1.2rem 3.2rem;
   border-radius: 20rem;
   background: rgba(0, 1, 2, 0.75); /* semi-opaque */
-  backdrop-filter: blur(6px); /* glassy */
+  backdrop-filter: blur(0.6rem); /* glassy */
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 2rem rgba(0, 0, 0, 0.35);
 }
 
 .nav__container {
@@ -216,7 +216,7 @@ header {
 .nav__container-links {
   display: flex;
   width: fit-content;
-  gap: 5.4rem;
+  gap: 2.4rem;
   a {
     font-size: var(--font-size-body-xl);
   }
@@ -225,9 +225,8 @@ header {
 /* Section Reveal animation */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);          /* one line-height down */
-  transition: opacity .45s ease-out,
-              transform .45s ease-out;
+  transform: translateY(24px); /* one line-height down */
+  transition: opacity 0.45s ease-out, transform 0.45s ease-out;
 }
 
 .reveal.reveal--in {
@@ -236,7 +235,11 @@ header {
 }
 /* Motion safety */
 @media (prefers-reduced-motion: reduce) {
-  .reveal { transition: none; opacity: 1; transform: none; }
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* ---- Hero Section ---- */
@@ -258,8 +261,10 @@ header {
   position: absolute;
   top: 0;
   left: 0;
-  width: 98.8vw;
-  height: 96.3rem;
+  right: 0;
+  bottom: 0;
+  width: 100%; /* ✅ Fill only the parent container */
+  height: 100%; /* ✅ Stretch vertically too */
   object-fit: cover;
   z-index: -1;
   pointer-events: none;
@@ -315,7 +320,7 @@ header {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
-    h4 {
+    h5 {
       background: var(--half-grad);
       background-clip: text;
       -webkit-background-clip: text;
@@ -373,6 +378,9 @@ header {
   gap: 2.4rem;
   align-items: start;
   justify-content: center;
+  background-color: var(--dark);
+  border-top-left-radius: 1.6rem;
+  border-bottom-left-radius: 1.6rem;
   .hero__target-heading {
     display: flex;
     gap: 0.5rem;
@@ -405,8 +413,8 @@ header {
         width: 100%;
       }
       .hero__target-arrow {
-        width: 4px;
-        height: 8px;
+        width: 0.4rem;
+        height: 0.8rem;
       }
       :hover {
         color: var(--light);
@@ -419,6 +427,8 @@ header {
   flex: 1;
   height: 100%;
   background: url("./assets/hero__target-brand-block-placeholder.png");
+  border-top-right-radius: 1.6rem;
+  border-bottom-right-radius: 1.6rem;
 }
 .hero__partners-strip {
   overflow: hidden;
@@ -475,7 +485,7 @@ header {
     gap: 2rem;
     transform: translateY(-13.3rem);
     overflow: hidden;
-    width: 98.8vw;
+    inset: 0;
     img {
       width: 29.9rem;
       object-fit: contain;
@@ -518,6 +528,7 @@ header {
   justify-content: center;
   align-items: center;
   gap: 2.7rem;
+  width: 100%;
   h1 {
     width: 80rem;
     text-align: center;
@@ -525,7 +536,7 @@ header {
   p {
     font-size: var(--font-size-body-lg);
     color: rgba(255, 255, 255, 0.6);
-    width: 86.6rem;
+    width: 100%;
     text-align: center;
   }
 }
@@ -656,8 +667,8 @@ header {
       position: relative;
       overflow: hidden;
       .process__step__inner-icon {
-        width: 63px;
-        height: 63px;
+        width: 6.3rem;
+        height: 6.3rem;
         img {
           object-fit: contain;
         }
@@ -670,9 +681,9 @@ header {
       }
       h1 {
         position: absolute;
-        bottom: -40px;
+        bottom: -4rem;
         right: 0;
-        font-size: 100px;
+        font-size: 10rem;
         color: var(--primary-color);
       }
     }
@@ -1048,6 +1059,158 @@ footer {
           object-fit: contain;
         }
       }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  html {
+    font-size: 56.5%;
+  }
+  body {
+    overflow-x: hidden;
+  }
+  header#site-header {
+    padding: 1.7rem 1.5rem;
+    width: 100vw;
+  }
+  .hero__section {
+    padding-left: unset;
+    padding-right: unset;
+  }
+  .hero__detail-container {
+    width: 100%;
+    padding: 1.2rem;
+    background: unset;
+    border: unset;
+    border-radius: unset;
+  }
+  .hero__video-bg {
+    position: absolute;
+    inset: 0; /* top: 0, right: 0, bottom: 0, left: 0 */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+  }
+  .hero__partners-strip {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  #before-after,
+  #growth,
+  #process,
+  #industries,
+  #work,
+  #pricing,
+  #call,
+  footer {
+    padding: 6.4rem;
+  }
+  .nav__container-links {
+    display: none;
+  }
+  .hero__detail-container {
+    flex-direction: column;
+  }
+  .hero__video-bg {
+    height: 154rem;
+    z-index: unset;
+  }
+  .hero__detail-left-col,
+  .hero__detail-right-col {
+    width: 100%;
+    height: unset;
+  }
+  .hero__detail-left-col {
+    gap: 2.4rem;
+    align-items: center;
+    .hero__text-heading-container {
+      align-items: center;
+      text-align: center;
+    }
+    p {
+      text-align: center;
+    }
+    .hero__rating-and-text-container {
+      align-items: center;
+    }
+    .hero__btn-and-highlights-container .hero__highlights-container {
+      justify-content: center;
+      gap: 3.2rem;
+    }
+    .btn {
+      max-width: 50rem;
+    }
+  }
+  .growth__blocks-container {
+    gap: 1.6rem;
+  }
+  .growth__block-1 {
+    flex-direction: column;
+    gap: 3.6rem;
+    align-items: center;
+    .growth__block-1__left p {
+      width: 50rem;
+    }
+    .growth__block-1__right img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .growth__block-2-and-3-container {
+    flex-direction: column;
+  }
+  .process__steps-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    margin: 0 auto;
+    gap: 32px 16px;
+  }
+  .industries__services-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .package__section .package__pricing-cards-container {
+    gap: 2.4rem;
+  }
+  footer .footer__block-1 .footer__logo-and-desc {
+    max-width: 28rem;
+    flex-direction: column;
+    align-items: start;
+  }
+}
+@media screen and (max-width: 768px) {
+  /* .hero__video-bg {
+    width: 100vw;
+  } */
+  .work__section .work__content-container {
+    width: 100%;
+  }
+  .process__section {
+    h1 {
+      text-wrap: balance;
+    }
+    .process__steps-container {
+      grid-template-columns: repeat(1, minmax(280px, 1fr));
+      .process__step-block {
+        width: 100%;
+      }
+    }
+  }
+  .package__section {
+    gap: 3.2rem;
+    .package__text-container {
+      width: 100%;
+      p {
+        width: 100%;
+      }
+    }
+    package__pricing-cards-container {
+      flex-direction: column;
     }
   }
 }

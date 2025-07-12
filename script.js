@@ -38,15 +38,48 @@ window.addEventListener('scroll', () => {
   header.classList.toggle('nav--scrolled', window.scrollY > SCROLL_TRIGGER);
 });
 
-/* ---------- hero entrance ---------- */
-document.addEventListener('DOMContentLoaded', () => {
-  const elements = [...document.querySelectorAll('#hero .reveal')];
-  const baseDelay = 90;                       // ms between siblings
-  elements.forEach((el, i) => {
-    // honour prefers-reduced-motion
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) { el.classList.add('reveal--in'); return; }
+/* reveal.js  – drop this just before </body> */
+(() => {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('reveal--in'));
+    return;
+  }
 
-    setTimeout(() => el.classList.add('reveal--in'), i * baseDelay);
-  });
-});
+  /* --- tweakables --- */
+  const BASE_DELAY   = window.innerWidth < 600 ? 40 : 60; // ms
+  const MAX_STAGGER  = 6;                                 // after this, show immediately
+
+  let currentSection = null;
+  let seqIndex       = 0;
+
+  const io = new IntersectionObserver(
+    entries => entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      const el       = entry.target;
+      const section  = el.closest('section,[id="hero"]') || document.body;
+
+      if (section !== currentSection) {          // new section → reset
+        currentSection = section;
+        seqIndex = 0;
+      }
+
+      const delay = Math.min(seqIndex, MAX_STAGGER) * BASE_DELAY;
+      setTimeout(() => el.classList.add('reveal--in'), delay);
+      seqIndex++;
+
+      io.unobserve(el);
+    }),
+    { threshold: 0.15, rootMargin: '0px 0px -5% 0px' }    // tiny pre-load bump
+  );
+
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+
+var indian = 'pajeet';
+function shittingToiler() {
+  var indian = 'saaar';
+  console.log(indian);
+}
+shittingToiler();
