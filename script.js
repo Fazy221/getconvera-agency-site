@@ -138,3 +138,22 @@ brandItems.forEach((item, index) => {
     brandImage.setAttribute("alt", item.innerText.trim());
   });
 });
+
+// Skeleton loading
+// Wait for DOM
+document.addEventListener("DOMContentLoaded", () => {
+  const showcaseImages = document.querySelectorAll(".work__showcase-img-container");
+
+  showcaseImages.forEach((container) => {
+    const img = container.querySelector("img");
+
+    // If already loaded from cache
+    if (img.complete) {
+      container.classList.add("loaded");
+    } else {
+      img.addEventListener("load", () => {
+        container.classList.add("loaded");
+      });
+    }
+  });
+});
