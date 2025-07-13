@@ -593,6 +593,8 @@ header {
   overflow: visible;
   background: #131313;
   border-radius: 2rem;
+  position: relative;
+  overflow: hidden;
 }
 .growth__block-1__left {
   display: flex;
@@ -637,6 +639,8 @@ header {
   background-color: #131313;
   border-radius: 2rem;
   padding: 4.2rem 5.4rem;
+  position: relative;
+  overflow: hidden;
   .growth__block-2-and-3__top {
     height: 36.2rem;
     width: 100%;
@@ -665,6 +669,31 @@ header {
       width: 36.2rem;
     }
   }
+}
+/* Animation on hover block */
+.growth__block-1::before,
+.growth__block-2-and-3::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 6rem;
+  width: 0.2rem; /* beam thickness */
+  height: 0; /* start collapsed */
+  background: linear-gradient(
+    to top,
+    rgba(36, 116, 255, 0) 0%,
+    rgba(36, 116, 255, 0.8) 50%,
+    rgba(36, 116, 255, 0) 100%
+  );
+  transition: height 0.8s ease-in-out; /* animate the height */
+  z-index: 2;
+}
+.growth__block-1:hover::before,
+.growth__block-2-and-3:hover::before {
+  height: 80%; /* animate from bottom → 50% (center) */
+}
+.growth__block-2-and-3:hover {
+  transform: scale(1.02);
 }
 .process__section {
   display: flex;
@@ -785,46 +814,76 @@ header {
 .work__section {
   display: flex;
   flex-direction: column;
-  padding: 6.4rem 13.5rem;
+  padding: 6.4rem 5rem;
   gap: 6.4rem;
   background: #0e0e0e;
   justify-content: center;
   align-items: center;
-  .work__content-container {
+}
+.work__content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+  width: 84.6rem;
+  justify-content: center;
+  align-items: center;
+  .work__text-container {
     display: flex;
     flex-direction: column;
-    gap: 3.2rem;
-    width: 84.6rem;
+    gap: 1.2rem;
     justify-content: center;
     align-items: center;
-    .work__text-container {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      h1 {
-        width: 55.4rem;
-      }
-      p {
-        color: rgba(255, 255, 255, 0.6);
-      }
+    text-align: center;
+    h1 {
+      width: 55.4rem;
     }
-    .btn {
-      width: 38.1rem;
+    p {
+      color: rgba(255, 255, 255, 0.6);
     }
+  }
+  .btn {
+    width: 38.1rem;
   }
 }
 .work__showcase-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.6rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.6rem 1.6rem;
   width: 100%;
-  .work__showcase-block {
-    height: 65rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 1.5rem;
+}
+.work__showcase-block {
+  display: flex;
+  flex-direction: column;
+  height: 46rem;
+  overflow: hidden;
+  gap: 0.8rem;
+  .work__showcase-img-container {
+    /* background: rgba(255, 255, 255, 0.1); */
+    width: 100%;
+    height: 80%;
+    img {
+      transition: 8s object-position ease-in;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      object-position: top;
+    }
+  }
+  .work__showcase-img-container:hover {
+    img {
+      object-position: bottom;
+    }
+  }
+  .work__showcase-content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    height: 20%;
+    p {
+      font-size: var(--font-size-body-md);
+      line-height: var(--font-line-height-sm);
+    }
+    /* padding: 0.8rem; */
   }
 }
 /* Package section */
@@ -891,6 +950,8 @@ header {
   border: 1px solid var(--gradient);
   border-radius: 2rem;
   gap: 1.8rem;
+  position: relative;
+  overflow: hidden;
   p {
     font-size: var(--font-size-body-md);
     line-height: var(--font-line-height-md);
@@ -899,6 +960,28 @@ header {
   h2 {
     font-weight: 300;
   }
+}
+.package__pricing-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0.2rem; /* beam thickness */
+  height: 0; /* start collapsed */
+  background: linear-gradient(
+    to top,
+    rgba(36, 116, 255, 0) 0%,
+    rgba(36, 116, 255, 0.8) 50%,
+    rgba(36, 116, 255, 0) 100%
+  );
+  transition: height 0.8s ease-in-out; /* animate the height */
+  z-index: 2;
+}
+.package__pricing-card:hover::before {
+  height: 100%;
+}
+.package__pricing-card:hover {
+  transform: scale(1.02);
 }
 .package__service-list-container {
   display: flex;
@@ -1186,7 +1269,7 @@ footer {
   }
   .hero__target__brand-detail {
     height: unset;
-   }
+  }
   .growth__blocks-container {
     gap: 1.6rem;
   }
@@ -1228,9 +1311,9 @@ footer {
   /* .hero__video-bg {
     width: 100vw;
   } */
-   html {
+  html {
     font-size: 52.5%;
-   }
+  }
   .work__section .work__content-container {
     width: 100%;
   }
