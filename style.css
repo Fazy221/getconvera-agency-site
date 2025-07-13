@@ -205,9 +205,9 @@ header {
 /* ------------- scrolled state ------------- */
 #site-header.nav--scrolled .nav__container {
   padding: 1.2rem 3.2rem;
-  border-radius: 20rem;
+  border-radius: 4rem;
   /* background: rgba(0, 1, 2, 0.75);  */
-  background: rgba(255, 255, 255, 0.05); 
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(0.6rem); /* glassy */
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 2rem rgba(0, 0, 0, 0.35);
@@ -440,13 +440,33 @@ header {
   justify-content: center;
   align-items: center;
   /* background: url("./assets/hero__target-brand-block-placeholder.png"); */
-  background: #1A1A1A;
+  background: #1a1a1a;
   border-top-right-radius: 1.6rem;
   border-bottom-right-radius: 1.6rem;
   img {
     width: 34rem;
     height: 16.5rem;
   }
+}
+.hero__target-brand:hover {
+  cursor: pointer;
+}
+.hero__target-brand.active {
+  background: linear-gradient(134deg, #212121 10.27%, #151515 96.74%);
+  border-radius: 0.6rem;
+}
+
+.hero__target-brand.active p {
+  color: white !important;
+}
+
+.hero__target-brand.active .hero__target-arrow {
+  opacity: 1;
+}
+
+.hero__target-brand p,
+.hero__target-arrow {
+  transition: all 0.2s ease;
 }
 .hero__partners-strip {
   overflow: hidden;
@@ -1164,6 +1184,9 @@ footer {
       max-width: 50rem;
     }
   }
+  .hero__target__brand-detail {
+    height: unset;
+   }
   .growth__blocks-container {
     gap: 1.6rem;
   }
@@ -1193,7 +1216,7 @@ footer {
     grid-template-columns: repeat(2, 1fr);
   }
   .package__section .package__pricing-cards-container {
-    gap: 2.4rem;
+    gap: 1.4rem;
   }
   footer .footer__block-1 .footer__logo-and-desc {
     max-width: 28rem;
@@ -1205,6 +1228,9 @@ footer {
   /* .hero__video-bg {
     width: 100vw;
   } */
+   html {
+    font-size: 52.5%;
+   }
   .work__section .work__content-container {
     width: 100%;
   }
@@ -1227,8 +1253,12 @@ footer {
         width: 100%;
       }
     }
-    package__pricing-cards-container {
+    .package__pricing-cards-container {
       flex-direction: column;
+      .package__pricing-card {
+        max-width: unset;
+        width: 100%;
+      }
     }
   }
 }

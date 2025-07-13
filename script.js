@@ -114,3 +114,27 @@ document.querySelectorAll("[data-scroll-to]").forEach((btn) => {
     smoothScrollTo(targetSelector, 1200, 70); // adjust duration & offset if needed
   });
 });
+
+// === Brand Selector Logic ===
+const brandItems = document.querySelectorAll(".hero__target-brand");
+const brandImage = document.querySelector(
+  ".hero__target__brand-detail img"
+);
+
+let activeBrand = null;
+
+brandItems.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    // Remove 'active' from previous
+    if (activeBrand) activeBrand.classList.remove("active");
+
+    // Add 'active' to this one
+    item.classList.add("active");
+    activeBrand = item;
+
+    // Dynamically load image
+    const newSrc = `./assets/hero__target__brand-detail_img-${index + 1}.png`;
+    brandImage.setAttribute("src", newSrc);
+    brandImage.setAttribute("alt", item.innerText.trim());
+  });
+});
