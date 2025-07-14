@@ -149,14 +149,20 @@ h6 {
 
 .btn--small {
   padding: var(--btn-padding-sm);
-  font-size: var(--btn-font-size-sm);
+  /* font-size: var(--btn-font-size-sm); */
 }
 
 .btn--icon .btn__icon {
   width: 2.4rem;
   height: 2.4rem;
 }
-
+.nav-btn__wrapper {
+  display: flex;
+  gap: 0.8rem;
+  flex-shrink: 0;
+  flex-grow: 0;
+  align-items: center;
+}
 .btn--outline {
   background: rgba(255, 255, 255, 0.2);
   color: var(rgba(255, 255, 255, 0.8));
@@ -188,6 +194,7 @@ header {
   display: flex;
   padding: 1.7rem 13.5rem;
   background-color: #000102;
+  transition: padding 0.35s ease;
 }
 /* ------------- base (page top) ------------- */
 #site-header {
@@ -205,7 +212,7 @@ header {
 /* ------------- scrolled state ------------- */
 #site-header.nav--scrolled .nav__container {
   padding: 1.2rem 3.2rem;
-  border-radius: 4rem;
+  border-radius: 10rem;
   /* background: rgba(0, 1, 2, 0.75);  */
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(0.6rem); /* glassy */
@@ -760,6 +767,7 @@ header {
       .process__step__inner-icon {
         width: 6.3rem;
         height: 6.3rem;
+        margin-bottom: 0.4rem;
         img {
           object-fit: contain;
         }
@@ -779,6 +787,10 @@ header {
       }
     }
   }
+}
+.process__cta-wrapper {
+  display: flex;
+  justify-content: center;
 }
 
 /* Industries Section */
@@ -888,6 +900,22 @@ header {
   }
   100% {
     transform: translateX(0);
+  }
+}
+
+.industries__cta-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  p {
+    width: 50%;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+  }
+  .industries__btn-wrapper {
+    display: flex;
+    justify-content: center;
   }
 }
 /* Work Section */
@@ -1552,17 +1580,36 @@ footer {
   h1 {
     font-size: var(--font-size-h3);
   }
+  section {
+    overflow: hidden;
+  }
+  header#site-header {
+    padding: 1.7rem 1.5rem;
+  }
   #site-header .btn--large {
     padding: var(--btn-padding-sm);
   }
   #site-header .nav__container .nav__container-img {
-    transform: scale(0.75);
+    width: 120px;
+    height: auto;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  #site-header.nav--scrolled {
+    padding: 1.7rem 0rem;
   }
   #site-header.nav--scrolled .nav__container {
-    padding: 0rem 1.6rem 0rem 0rem ;
-    margin-top: 1.2rem;
+    padding: 1.2rem 1.4rem 1.2rem 1.8rem;
+    border-radius: 10rem;
     .nav__container-img {
-      transform: scale(0.75);
+      width: 120px;
+      height: auto;
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
   .hero__detail-right-col {
@@ -1574,6 +1621,13 @@ footer {
     align-items: center;
     border-bottom-left-radius: unset;
     border-top-right-radius: 1.6rem;
+    .hero__target-heading {
+      align-items: center;
+      p {
+        font-size: var(--font-size-body-xl);
+        line-height: var(--font-line-height-xl);
+      }
+    }
     .hero__target-brands-container {
       flex-direction: row;
       overflow: scroll;
@@ -1585,9 +1639,23 @@ footer {
     }
   }
   .hero__target__brand-detail {
-    min-height: 30rem;
+    min-height: 26rem;
     border-top-right-radius: unset;
     border-bottom-left-radius: 1.6rem;
+    img {
+      object-fit: contain;
+    }
+  }
+  .hero__detail-left-col .hero__btn-and-highlights-container {
+    width: 100%;
+    align-items: center;
+    .hero__highlights-container {
+      gap: 0rem;
+      justify-content: space-between;
+      .hero__highlight-box p {
+        text-align: start;
+      }
+    }
   }
   #growth {
     padding: 3.2rem 0rem;
@@ -1624,6 +1692,9 @@ footer {
       height: auto;
     }
   }
+  .industries__cta-wrapper p {
+    width: 50%;
+  }
   .work__showcase-container {
     grid-template-columns: repeat(1, 1fr);
     gap: 1.6rem;
@@ -1635,11 +1706,15 @@ footer {
     grid-template-columns: repeat(1, 1fr);
 
     .process__step-block {
-      width: 42rem;
+      width: 100%;
+      max-width: 42rem;
       height: 32rem;
       overflow: hidden;
-      .process__step__inner-block h1 {
-        bottom: 1.5rem;
+      .process__step__inner-block {
+        width: 100%;
+        h1 {
+          bottom: 1.5rem;
+        }
       }
     }
   }

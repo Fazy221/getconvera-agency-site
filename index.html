@@ -24,14 +24,17 @@
           <a class="scroll-link" href="#work">Work</a>
           <a class="scroll-link" href="#pricing">Pricing</a>
         </div>
-        <button class="btn btn--large nav-btn-content-change" onclick="window.open('https://calendly.com/getconvera/30min', '_blank')">
+        <div class="nav-btn__wrapper">
+          <button class="btn btn--large nav-btn-content-change" onclick="window.open('https://calendly.com/getconvera/30min', '_blank')">
           <img
             class="btn--icon"
             src="./assets/cta_call_icon.svg"
             alt="Get Convera call for consultation icon"
           />
-          Book Free Consultation
+            <span class="nav-btn-text">Book Free Consultation</span>
         </button>
+        <a class="nav-btn-outline" style="display: none;" href="mailto:getconvera@gmail.com"><button class="btn btn--small btn--outline">Chat Now</button></a> 
+        </div>
       </nav>
     </header>
 
@@ -209,6 +212,7 @@
         <div class="growth__head-container">
           <h1 class="reveal">Our Formula for Your <span class="highlighted-heading">Exponential Growth</span> </h1>
           <p class="reveal">We combine deep UI/UX insights with expert web development, all powered by meticulous CRO. This ensures every redesign and optimization isn't just beautiful, but strategically built to drive significant, measurable increases in your conversions.</p>
+          <a href="mailto:getconvera@gmail.com"><button class="btn btn--large btn--outline">Have Question? Email Us</button></a> 
         </div>
         <div class="reveal growth__blocks-container">
           <div class="growth__block-1 reveal">
@@ -246,7 +250,7 @@
         </div>
       </section>
       <section id="process" class="process__section">
-        <div class="process__header">
+        <div class="reveal process__header">
           <h1 class="reveal">Your Vision, Our <span class="highlighted-heading">Proven Process</span></h1>
           <p class="reveal">We follow a streamlined, collaborative process to turn your vision into a high-performing digital experience.</p>
         </div>
@@ -292,9 +296,12 @@
             </div>
           </div>
         </div>
+        <div class="reveal process__cta-wrapper">
+          <button class="btn btn--large scroll-to-call" data-scroll-to="#call">Need Guidance? Book Call With Us For Free</button>
+        </div>
       </section>
       <section id="industries" class="industries__section">
-        <div class="industries__content-container">
+        <div class="reveal industries__content-container">
           <h1 class="reveal">Unlock Conversions <span class="highlighted-heading">Across Industries</span> </h1>
           <p class="reveal">From beauty and wellness to fashion, tech, and beyond, we design CRO-focused websites tailored specifically for D2C brands, driving growth across every market we touch.</p>
         </div>
@@ -439,6 +446,10 @@
              </div>
            </div>
           </div>
+        </div>
+        <div class="reveal industries__cta-wrapper">
+          <p>Don't see your brand? Or want a completely custom site? Just email us. We'll point you in the right direction.</p>
+          <div class="industries__btn-wrapper"><a href="mailto:getconvera@gmail.com"> <button class="btn btn--large btn--outline">Email Us Your Site Details</button> </a> </div>
         </div>
       </section>
       <section id="work" class="work__section">

@@ -159,15 +159,24 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 // Change nav btn content
 function updateNavBtnText() {
-  const navBtnChange = document.querySelector(".nav-btn-content-change");
-  if (!navBtnChange) return;
+  const btn = document.querySelector(".nav-btn-content-change");
+  const btnOutline = document.querySelector(".nav-btn-outline");
+  const btnText = btn?.querySelector(".nav-btn-text");
+  const btnIcon = btn?.querySelector(".btn--icon");
+
+  if (!btnText || !btnIcon) return;
 
   if (window.innerWidth < 540) {
-    navBtnChange.innerText = "Book Now";
+    btnText.innerText = "Book Now";
+    btnIcon.style.display = "none";
+    btnOutline.style.display = "flex"
   } else {
-    navBtnChange.innerText = "Book Free Consultation";
+    btnText.innerText = "Book Free Consultation";
+    btnIcon.style.display = "inline-block";
+    btnOutline.style.display = "none"
   }
 }
 
+// Run on load and on resize
 window.addEventListener("DOMContentLoaded", updateNavBtnText);
 window.addEventListener("resize", updateNavBtnText);
