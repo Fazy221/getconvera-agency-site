@@ -158,9 +158,16 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 // Change nav btn content
-const navBtnChange = document.querySelector(".nav-btn-content-change");
-document.addEventListener("DOMContentLoaded", () => {
-  if (window.innerWidth < 540 && navBtnChange) {
+function updateNavBtnText() {
+  const navBtnChange = document.querySelector(".nav-btn-content-change");
+  if (!navBtnChange) return;
+
+  if (window.innerWidth < 540) {
     navBtnChange.innerText = "Book Now";
+  } else {
+    navBtnChange.innerText = "Book Free Consultation";
   }
-});
+}
+
+window.addEventListener("DOMContentLoaded", updateNavBtnText);
+window.addEventListener("resize", updateNavBtnText);
