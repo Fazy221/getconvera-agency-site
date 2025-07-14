@@ -1357,10 +1357,8 @@ footer {
 }
 
 @media screen and (max-width: 960px) {
-  #before-after,
   #growth,
   #process,
-  #industries,
   #work,
   #pricing,
   #call,
@@ -1406,6 +1404,12 @@ footer {
   .hero__target__brand-detail {
     height: unset;
   }
+  .hero__partners-strip {
+    width: 60%;
+  }
+  .before-after__section {
+    padding: unset;
+  }
   .growth__blocks-container {
     gap: 1.6rem;
   }
@@ -1424,26 +1428,47 @@ footer {
   .growth__block-2-and-3-container {
     flex-direction: column;
   }
+  .industries__section {
+    padding: 6.4rem 0;
+  }
+  .work__showcase-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .process__steps-container {
     display: grid;
     grid-template-columns: repeat(2, minmax(280px, 1fr));
     margin: 0 auto;
     gap: 32px 16px;
   }
-  .industries__services-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
   .package__section .package__pricing-cards-container {
     gap: 1.4rem;
+  }
+  .final-cta__section {
+    padding: 5rem 0rem 0rem 0rem;
+  }
+
+  .final-cta__inner-section::after {
+    width: 100vw;
+    border-radius: unset;
   }
   footer .footer__block-1 .footer__logo-and-desc {
     max-width: 28rem;
     flex-direction: column;
     align-items: start;
+    span {
+      display: none;
+    }
   }
 }
 @media screen and (max-width: 768px) {
+  #growth,
+  #process,
+  #work,
+  #pricing,
+  #call,
+  footer {
+    padding: 3.2rem;
+  }
   /* .hero__video-bg {
     width: 100vw;
   } */
@@ -1461,26 +1486,111 @@ footer {
       text-wrap: balance;
     }
     .process__steps-container {
+      gap: 3.2rem 0rem;
+      justify-items: center;
+    }
+    /* .process__steps-container {
       grid-template-columns: repeat(1, minmax(280px, 1fr));
       .process__step-block {
         width: 100%;
+      } */
+  }
+}
+.package__section {
+  gap: 3.2rem;
+  .package__text-container {
+    width: 100%;
+    p {
+      width: 100%;
+    }
+  }
+  .package__pricing-cards-container {
+    flex-direction: column;
+    .package__pricing-card {
+      max-width: unset;
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 540px) {
+  html {
+    font-size: 50%; /* 1rem = 8px */
+  }
+  .nav__container {
+    padding: 0.4rem 0.6rem;
+    margin-top: 1.2rem;
+    .nav__container-img {
+      transform: scale(0.75);
+    }
+  }
+  .hero__detail-right-col {
+    flex-direction: column;
+  }
+
+  .hero__target__brand-listings {
+    width: 100%;
+    align-items: center;
+    border-bottom-left-radius: unset;
+    border-top-right-radius: 1.6rem;
+    .hero__target-brands-container {
+      flex-direction: row;
+      overflow: scroll;
+      .hero__target-brand {
+        flex-direction: column;
+        text-align: center;
+        min-width: 16rem;
       }
     }
   }
-  .package__section {
-    gap: 3.2rem;
-    .package__text-container {
+  .hero__target__brand-detail {
+    min-height: 30rem;
+    border-top-right-radius: unset;
+    border-bottom-left-radius: 1.6rem;
+  }
+  #growth {
+    padding: 3.2rem 0rem;
+  }
+  .growth__head-container {
+    padding: 0rem 3.2rem;
+    h1,
+    p {
       width: 100%;
-      p {
-        width: 100%;
+    }
+  }
+  .growth__blocks-container {
+    width: 100%;
+  }
+  .growth__block-1__right {
+    width: 90vw;
+    height: auto;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  .growth__block-2-and-3 {
+    gap: 0rem;
+    height: auto;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  .process__steps-container {
+    grid-template-columns: repeat(1, 1fr);
+    .process__step-block {
+      width: 42rem;
+      height: 32rem;
+      overflow: hidden;
+      .process__step__inner-block h1 {
+        bottom: 1.5rem;
       }
     }
-    .package__pricing-cards-container {
-      flex-direction: column;
-      .package__pricing-card {
-        max-width: unset;
-        width: 100%;
-      }
+  }
+  .industries__section .industries__content-container {
+    h1, p {
+      width: 100%;
     }
   }
 }
