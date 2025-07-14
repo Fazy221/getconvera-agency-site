@@ -117,9 +117,7 @@ document.querySelectorAll("[data-scroll-to]").forEach((btn) => {
 
 // === Brand Selector Logic ===
 const brandItems = document.querySelectorAll(".hero__target-brand");
-const brandImage = document.querySelector(
-  ".hero__target__brand-detail img"
-);
+const brandImage = document.querySelector(".hero__target__brand-detail img");
 
 let activeBrand = null;
 
@@ -142,7 +140,9 @@ brandItems.forEach((item, index) => {
 // Skeleton loading
 // Wait for DOM
 document.addEventListener("DOMContentLoaded", () => {
-  const showcaseImages = document.querySelectorAll(".work__showcase-img-container");
+  const showcaseImages = document.querySelectorAll(
+    ".work__showcase-img-container"
+  );
 
   showcaseImages.forEach((container) => {
     const img = container.querySelector("img");
@@ -156,4 +156,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   });
+});
+// Change nav btn content
+const navBtnChange = document.querySelector(".nav-btn-content-change");
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.innerWidth < 540 && navBtnChange) {
+    navBtnChange.innerText = "Book Now";
+  }
 });
