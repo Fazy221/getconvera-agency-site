@@ -369,6 +369,7 @@ header {
     align-items: center;
     gap: 0.4rem;
     img {
+      z-index: 1;
       width: 1.4rem;
       height: 1.4rem;
     }
@@ -829,9 +830,9 @@ header {
   position: relative;
 }
 .industries__marquee-wrapper {
+  position: relative;
   overflow: hidden;
   width: 100%;
-  position: relative;
 }
 .industries__services-container--1 {
   justify-content: start;
@@ -853,11 +854,14 @@ header {
 }
 .industries__marquee-wrapper::before {
   background: linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, #0f0f0f 100%);
-  left: 0;
+  z-index: 1;
+  height: 7.55rem;
+  left: 0rem;
 }
 .industries__marquee-wrapper::after {
   background: linear-gradient(270deg, #0f0f0f 0%, rgba(0, 0, 0, 0) 100%);
-  right: 0;
+  height: 7.55rem;
+  right: 0rem;
 }
 
 .industries__service-block {
@@ -1019,6 +1023,18 @@ header {
   p {
     font-size: var(--font-size-body-md);
     line-height: var(--font-line-height-sm);
+  }
+  .work__showcase-content-head {
+    display: flex;
+    width: 100%;
+    justify-content: start;
+    align-items: center;
+    button {
+      display: none;
+      padding: var(--btn-padding-sm);
+      background-color: unset;
+      border: 0.05rem solid rgba(255,255,255,255.6);
+    }
   }
   /* padding: 0.8rem; */
 }
@@ -1434,6 +1450,7 @@ footer {
     .hero__btn-and-highlights-container .hero__highlights-container {
       justify-content: center;
       gap: 3.2rem;
+      width: 100%;
     }
     .btn {
       max-width: 50rem;
@@ -1518,7 +1535,10 @@ footer {
     font-size: 52.5%;
   }
   .before-after__mockups-container {
-    animation-duration: 60s;
+    animation-duration: 6s;
+    img:nth-child(n + 6) {
+      display: none;
+    }
   }
   .work__section .work__content-container {
     width: 100%;
@@ -1584,6 +1604,12 @@ footer {
         }
       }
     }
+    .final-cta__mockups-container {
+      animation-duration: 25s;
+      img:nth-child(n + 6) {
+        display: none;
+      }
+    }
   }
 }
 
@@ -1602,6 +1628,9 @@ footer {
   }
   #site-header .btn--large {
     padding: var(--btn-padding-sm);
+    min-width: 4.8rem;
+    min-height: 4.8rem;
+    cursor: pointer;
   }
   #site-header .nav__container .nav__container-img {
     width: 120px;
@@ -1718,12 +1747,24 @@ footer {
       width: 100%;
     }
   }
+  .work__content-container > button {
+    display: none;
+  }
   .work__showcase-container {
     grid-template-columns: repeat(1, 1fr);
     gap: 1.6rem;
+    .work__showcase-content-head {
+      justify-content: space-between;
+      button {
+        display: flex;
+      }
+    }
   }
   .process__header p {
     width: 100%;
+  }
+  .process__cta-wrapper button {
+    text-wrap: balance;
   }
   .process__steps-container {
     grid-template-columns: repeat(1, 1fr);
