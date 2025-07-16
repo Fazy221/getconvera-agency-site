@@ -843,19 +843,19 @@ header {
   animation: scroll-right 35s linear infinite;
   width: max-content;
 }
-.industries__services-container::before,
-.industries__services-container::after {
+.industries__marquee-wrapper::before,
+.industries__marquee-wrapper::after {
   content: "";
   position: absolute;
   top: 0;
   width: 21.8rem;
   height: 6.8rem;
 }
-.industries__services-container::before {
+.industries__marquee-wrapper::before {
   background: linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, #0f0f0f 100%);
   left: 0;
 }
-.industries__services-container::after {
+.industries__marquee-wrapper::after {
   background: linear-gradient(270deg, #0f0f0f 0%, rgba(0, 0, 0, 0) 100%);
   right: 0;
 }
