@@ -116,25 +116,33 @@ document.querySelectorAll("[data-scroll-to]").forEach((btn) => {
 });
 
 // === Brand Selector Logic ===
-const brandItems = document.querySelectorAll(".hero__target-brand");
-const brandImage = document.querySelector(".hero__target__brand-detail img");
+document.addEventListener("DOMContentLoaded", () => {
+  const brandItems = document.querySelectorAll(".hero__target-brand");
+  const brandImage = document.getElementById("brand-preview-img");
 
-let activeBrand = null;
+  let activeBrand = null;
 
-brandItems.forEach((item, index) => {
-  item.addEventListener("click", () => {
-    // Remove 'active' from previous
-    if (activeBrand) activeBrand.classList.remove("active");
+  brandItems.forEach((item, index) => {
+    item.addEventListener("click", () => {
+      // Remove previous active
+      if (activeBrand) activeBrand.classList.remove("active");
 
-    // Add 'active' to this one
-    item.classList.add("active");
-    activeBrand = item;
+      // Mark this one active
+      item.classList.add("active");
+      activeBrand = item;
 
-    // Dynamically load image
-    const newSrc = `./assets/hero__target__brand-detail_img-${index + 1}.png`;
-    brandImage.setAttribute("src", newSrc);
-    brandImage.setAttribute("alt", item.innerText.trim());
+      // Swap the image
+      const imagePath = `./assets/hero__target__brand-detail_img-${
+        index + 1
+      }.png`;
+      brandImage.src = imagePath;
+      brandImage.alt = item.innerText.trim();
+    });
   });
+
+  // Set default preview on first load (no active state)
+  brandImage.src = "./assets/hero__target__placeholder.png";
+  brandImage.alt = "Select your industry";
 });
 
 // Skeleton loading
@@ -169,11 +177,11 @@ function updateNavBtnText() {
   if (window.innerWidth < 540) {
     btnText.innerText = "Book Now";
     btnIcon.style.display = "none";
-    btnOutline.style.display = "flex"
+    btnOutline.style.display = "flex";
   } else {
     btnText.innerText = "Book Free Consultation";
     btnIcon.style.display = "inline-block";
-    btnOutline.style.display = "none"
+    btnOutline.style.display = "none";
   }
 }
 
