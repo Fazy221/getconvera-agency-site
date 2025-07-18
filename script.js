@@ -119,31 +119,42 @@ document.querySelectorAll("[data-scroll-to]").forEach((btn) => {
 document.addEventListener("DOMContentLoaded", () => {
   const brandItems = document.querySelectorAll(".hero__target-brand");
   const brandImage = document.getElementById("brand-preview-img");
+  const spinner = document.getElementById("brand-spinner");
 
   let activeBrand = null;
 
   brandItems.forEach((item, index) => {
     item.addEventListener("click", () => {
-      // Remove previous active
+      // If already selected, don't re-trigger
+      if (item === activeBrand) return;
+
+      // Remove active class
       if (activeBrand) activeBrand.classList.remove("active");
 
-      // Mark this one active
       item.classList.add("active");
       activeBrand = item;
 
-      // Swap the image
-      const imagePath = `./assets/hero__target__brand-detail_img-${
-        index + 1
-      }.png`;
-      brandImage.src = imagePath;
-      brandImage.alt = item.innerText.trim();
+      // Show spinner
+      spinner.style.display = "flex";
+
+      const tempImg = new Image();
+      const newSrc = `./assets/hero__target__brand-detail_img-${index + 1}.png`;
+
+      tempImg.src = newSrc;
+
+      tempImg.onload = () => {
+        brandImage.src = newSrc;
+        brandImage.alt = item.innerText.trim();
+
+        // Small delay to simulate smooth transition
+        setTimeout(() => {
+          spinner.style.display = "none";
+        }, 200); // Optional
+      };
     });
   });
-
-  // Set default preview on first load (no active state)
-  brandImage.src = "./assets/hero__target__placeholder.png";
-  brandImage.alt = "Select your industry";
 });
+
 
 // Skeleton loading
 // Wait for DOM
