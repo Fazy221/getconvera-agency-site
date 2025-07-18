@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Change nav btn content
 function updateNavBtnText() {
   const btn = document.querySelector(".nav-btn-content-change");
-  const btnOutline = document.querySelector(".nav-btn-outline");
+  const btnOutline = document.querySelector(".btn--outline--hid");
   const btnText = btn?.querySelector(".nav-btn-text");
   const btnIcon = btn?.querySelector(".btn--icon");
 
