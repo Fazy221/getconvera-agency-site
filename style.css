@@ -1133,11 +1133,28 @@ header {
   gap: 1.8rem;
   position: relative;
   overflow: hidden;
-  p {
-    font-size: var(--font-size-body-md);
-    line-height: var(--font-line-height-md);
-    font-weight: bold;
+  .package__pricing-head-container {
+    display: flex;
+    gap: 0.8rem;
+    p:first-child {
+      font-size: var(--font-size-body-md);
+      line-height: var(--font-line-height-md);
+      font-weight: bold;
+    }
+    .package__pricing-tag-container {
+      background-color: var(--primary-color);
+      display: flex;
+      color: white;
+      padding: 4px 8px;
+      text-align: center;
+      border-radius: 5px;
+      p {
+        font-size: var(--font-size-body-xs);
+        line-height: var(--font-line-height-xs);
+      }
+    }
   }
+
   h2 {
     font-weight: 300;
   }
@@ -1841,8 +1858,8 @@ footer {
         }
         .footer__logo-and-desc p {
           display: none;
+        }
       }
-    }
       .footer__block-2 {
         gap: 1.4rem;
         justify-content: center;
