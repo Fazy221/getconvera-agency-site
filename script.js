@@ -155,7 +155,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
 // Skeleton loading
 // Wait for DOM
 document.addEventListener("DOMContentLoaded", () => {
@@ -199,3 +198,41 @@ function updateNavBtnText() {
 // Run on load and on resize
 window.addEventListener("DOMContentLoaded", updateNavBtnText);
 window.addEventListener("resize", updateNavBtnText);
+
+// Set countdown duration (in seconds)
+const countdownSpan = document.getElementById("countdown-timer");
+const TIMER_DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+// Step 1: Get or Set Countdown End Time in localStorage
+let endTime = localStorage.getItem("countdownEndTime");
+
+if (!endTime || new Date(endTime) <= new Date()) {
+  const newEndTime = new Date(Date.now() + TIMER_DURATION_MS);
+  localStorage.setItem("countdownEndTime", newEndTime.toISOString());
+  endTime = newEndTime;
+} else {
+  endTime = new Date(endTime);
+}
+
+// Step 2: Start Timer Logic
+function updateCountdown() {
+  const now = new Date();
+  const diff = endTime - now;
+
+  if (diff <= 0) {
+    countdownSpan.textContent = "00:00:00";
+    clearInterval(timerInterval);
+    // Optional: reset timer if you want another round
+    // localStorage.removeItem('countdownEndTime');
+    return;
+  }
+
+  const hours = String(Math.floor(diff / 1000 / 60 / 60)).padStart(2, "0");
+  const minutes = String(Math.floor((diff / 1000 / 60) % 60)).padStart(2, "0");
+  const seconds = String(Math.floor((diff / 1000) % 60)).padStart(2, "0");
+
+  countdownSpan.textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+const timerInterval = setInterval(updateCountdown, 1000);
+updateCountdown(); // initial render
