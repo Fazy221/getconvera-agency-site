@@ -9,6 +9,11 @@ html {
   font-size: 62.5%;
   /* scroll-behavior: smooth; */
 }
+/* IOS Fix */
+html,
+body {
+  overscroll-behavior: none;
+}
 :root {
   /* Color Scheme */
   --primary-color: #2474ff;
@@ -1791,7 +1796,9 @@ footer {
     width: 100%;
   }
   .growth__block-1 {
-    .growth__block-1__left h2,
+    .growth__block-1__left h2 {
+      width: 100%;
+    }
     .growth__block-1__left p {
       width: 100%;
     }

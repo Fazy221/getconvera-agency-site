@@ -106,6 +106,44 @@ const observer = new IntersectionObserver(
 
 sections.forEach((section) => observer.observe(section));
 
+// Function to load the video when it enters the viewport
+document.addEventListener("DOMContentLoaded", function () {
+  function loadVideoOnScroll(entries, observer) {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const video = entry.target;
+        const webmSource = video.getAttribute("data-src-webm");
+        const mp4Source = video.getAttribute("data-src-mp4");
+
+        // Create a WebM source element if supported
+        const webmElement = document.createElement("source");
+        webmElement.src = webmSource;
+        webmElement.type = "video/webm";
+        video.appendChild(webmElement); // Append WebM source to the video
+
+        // Create a MP4 source element as fallback
+        const mp4Element = document.createElement("source");
+        mp4Element.src = mp4Source;
+        mp4Element.type = "video/mp4";
+        video.appendChild(mp4Element); // Append MP4 source to the video
+
+        // Remove the lazy-loaded video container and start the video
+        video.load();
+        observer.unobserve(video); // Stop observing once the video is loaded
+      }
+    });
+  }
+
+  // IntersectionObserver setup for lazy loading
+  const observer = new IntersectionObserver(loadVideoOnScroll, {
+    rootMargin: "0px 0px -50% 0px", // Trigger when 50% of the video is visible
+  });
+
+  // Observe the video container
+  const videoContainers = document.querySelectorAll(".hero__video-bg");
+  videoContainers.forEach((container) => observer.observe(container));
+});
+
 // Scroll to call section from hero btn
 document.querySelectorAll("[data-scroll-to]").forEach((btn) => {
   btn.addEventListener("click", (e) => {

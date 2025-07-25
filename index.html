@@ -62,13 +62,14 @@
 
     <main>
       <section id="hero" class="hero__section">
-        <video class="hero__video-bg" autoplay muted loop playsinline poster="./assets/hero__bg.png">
-          <source src="./assets/hero_bg.webm" type="video/webm" />
+         <video class="hero__video-bg" autoplay muted loop playsinline poster="./assets/hero__bg.png" data-src-webm="./assets/hero_bg.webm" data-src-mp4="./assets/hero_bg.mp4">
+          <!-- Static fallback image if video doesn't load -->
+          <img src="./assets/hero__bg.png" alt="Background Image">
         </video>
-      <div class="hero__detail-container">
+      <div class="hero__detail-container reveal">
         <div class="hero__detail-left-col">
           <div class="hero__rating-and-text-container">
-            <div class="hero__rating reveal">
+            <div class="hero__rating ">
               <img src="./assets/hero__rating.png" alt="Get Convera Rating" />
               <div class="hero__rating-detail">
                 <img
@@ -79,11 +80,11 @@
               </div>
             </div>
             <div class="hero__text-container">
-              <div class="hero__text-heading-container reveal">
+              <div class="hero__text-heading-container ">
                 <h5>HACK YOUR SITE GROWTH</h5>
                 <h1>Stop Guessing. Start Growing.</h1>
               </div>
-              <p class="reveal">
+              <p class="">
                 GetConvera is a CRO agency that turns your website visitors into
                 loyal, paying customers through carefully curated redesign of
                 site. <b>Schedule Your Free 20-Minute Growth Session.</b>
@@ -124,7 +125,7 @@
             </div>
           </div>
         </div>
-        <div class="hero__detail-right-col reveal">
+        <div class="hero__detail-right-col ">
             <div class="hero__target__brand-listings">
                 <div class="hero__target-heading">
                     <img src="./assets/hero__target-head-icon.svg" alt="Get Convera Target Brands Icon">
