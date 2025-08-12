@@ -851,6 +851,11 @@ header {
     color: rgba(255, 255, 255, 0.6);
   }
 }
+.industries__wrappers-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
 .industries__services-wrapper {
   display: flex;
   flex-direction: column;
