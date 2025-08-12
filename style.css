@@ -1158,7 +1158,6 @@ header {
         line-height: var(--font-line-height-xs);
       }
     }
-    
   }
   .package__pricing-mention-container {
     display: flex;
@@ -1166,7 +1165,7 @@ header {
     align-items: center;
     .package__pricing-discount--style {
       text-decoration-line: line-through;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255, 255, 255, 0.6);
       font-size: var(--font-size-body-xl);
       line-height: var(--font-line-height-xl);
     }
@@ -1384,7 +1383,7 @@ aside.sticky-footer-banner {
 footer {
   display: flex;
   flex-direction: column;
-  padding: 6.4rem 13.5rem;
+  padding: 6.4rem;
   background: var(--dark);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   gap: 2.4rem;
@@ -1703,6 +1702,9 @@ footer {
       }
     }
   }
+  /* footer {
+    padding-bottom: 2.4rem;
+  } */
 }
 
 @media screen and (max-width: 540px) {
@@ -1906,6 +1908,7 @@ footer {
   }
   footer {
     gap: 1.6rem;
+    margin-bottom: 3.22rem;
     .footer__wrapper {
       flex-direction: column;
       gap: 1.8rem;
