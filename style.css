@@ -1283,8 +1283,9 @@ header {
   content: "";
   position: absolute;
   z-index: 0;
+  pointer-events: none;
   width: 92.2vw;
-  height: 91.3rem;
+  /* height: 91.3rem; */
   background: linear-gradient(180deg, #ffffff 13.39%, #2115c2 68.75%);
   top: 0;
   left: 0;
@@ -1323,6 +1324,7 @@ header {
   height: 57.2rem;
   flex-shrink: 0;
   img {
+    display: block;
     object-fit: cover;
     width: 100%;
     height: 100%;
@@ -1335,22 +1337,27 @@ header {
   height: 57.2rem;
   overflow: hidden;
   position: relative;
+  isolation: isolate; /* <-- key for iOS */
+  contain: paint; /* helps Safari’s compositor */
 }
 .final-cta__mockups-wrapper:hover .final-cta__mockups-container {
   animation-play-state: paused;
 }
 .final-cta__mockups-container {
-  display: flex;
+  display: inline-flex; /* was: display:flex */
+  white-space: nowrap;
   gap: 1.831rem;
-  width: max-content;
-  animation: scroll-mockups 40s linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0); /* force GPU layer */
+  animation: scroll-mockups 15s linear infinite;
+  width: 100vw; /* Ensure it takes full viewport width */
 }
 @keyframes scroll-mockups {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-100vw); /* Adjust based on viewport width */
   }
 }
 
@@ -1464,7 +1471,12 @@ footer {
     text-align: center;
   }
 }
-
+@supports (-webkit-touch-callout: none) {
+  .final-cta__inner-section::after {
+    /* if you still see clipping on certain iPhones, un-round on iOS only: */
+    border-radius: 0;
+  }
+}
 @media screen and (max-width: 1200px) {
   html {
     font-size: 56.5%;
@@ -1696,10 +1708,18 @@ footer {
       }
     }
     .final-cta__mockups-container {
-      animation-duration: 25s;
-      img:nth-child(n + 6) {
+      animation-duration: 5s;
+      .final-cta__mockup:nth-child(n + 6) {
         display: none;
       }
+    }
+    @keyframes scroll-mockups {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      100% {
+        transform: translate3d(-50%, 0, 0);
+      } /* use 3D variant */
     }
   }
   /* footer {
@@ -1889,8 +1909,10 @@ footer {
       height: 34.2rem;
       .final-cta__mockups-container {
         height: 100%;
+        animation-duration: 5s;
         .final-cta__mockup {
           flex-shrink: unset;
+          min-width: 19.4rem;
           width: 100%;
           height: 100%;
         }
