@@ -1087,8 +1087,7 @@ header {
   justify-content: center;
   align-items: center;
   position: relative;
-  div:first-child,
-  div:last-child {
+  div {
     z-index: 1;
   }
   .package__text-container {
@@ -1099,7 +1098,7 @@ header {
     align-items: center;
     gap: 1.2rem;
     h1 {
-      width: 69rem;
+      width: 80rem;
     }
     p {
       color: rgba(255, 255, 255, 0.6);
@@ -1126,7 +1125,7 @@ header {
 .package__pricing-cards-container {
   display: flex;
   width: 100%;
-  gap: 6.4rem;
+  gap: 1.6rem;
   align-items: center;
   justify-content: center;
 }
@@ -1143,37 +1142,74 @@ header {
   gap: 1.8rem;
   position: relative;
   overflow: hidden;
-  .package__pricing-head-container {
+  .package__pricing-header__container {
     display: flex;
     gap: 0.8rem;
-    p:first-child {
+  }
+  .package__pricing-header__img-container {
+    width: 4rem;
+    height: 4rem;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .package__pricing-header__content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    .package__pricing-head-container {
+      display: flex;
+      gap: 0.8rem;
+      p:first-child {
+        font-size: var(--font-size-body-md);
+        line-height: var(--font-line-height-md);
+        font-weight: bold;
+      }
+      .package__pricing-tag-container {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--primary-color);
+        display: flex;
+        color: white;
+        padding: 4px 8px;
+        text-align: center;
+        border-radius: 5px;
+        p {
+          font-size: var(--font-size-body-xs);
+          line-height: var(--font-line-height-xs);
+        }
+      }
+    }
+    .package__pricing-desc-container p {
       font-size: var(--font-size-body-md);
       line-height: var(--font-line-height-md);
-      font-weight: bold;
+      font-weight: var(--font-weight-regular);
     }
-    .package__pricing-tag-container {
-      background-color: var(--primary-color);
+  }
+  .package__pricing-price__container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    p:first-child {
+      font-size: var(--font-size-body-xs);
+      line-height: var(--font-line-height-xs);
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .package__pricing-mention-container {
       display: flex;
-      color: white;
-      padding: 4px 8px;
-      text-align: center;
-      border-radius: 5px;
-      p {
-        font-size: var(--font-size-body-xs);
-        line-height: var(--font-line-height-xs);
+      gap: 0.8rem;
+      align-items: center;
+      .package__pricing-discount--style {
+        text-decoration-line: line-through;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: var(--font-size-body-xl);
+        line-height: var(--font-line-height-xl);
       }
     }
   }
-  .package__pricing-mention-container {
-    display: flex;
-    gap: 0.8rem;
-    align-items: center;
-    .package__pricing-discount--style {
-      text-decoration-line: line-through;
-      color: rgba(255, 255, 255, 0.6);
-      font-size: var(--font-size-body-xl);
-      line-height: var(--font-line-height-xl);
-    }
+  .package__pricing-detail {
+    font-size: var(--font-size-body-sm);
+    line-height: var(--font-line-height-sm);
   }
 
   h2 {
@@ -1221,7 +1257,7 @@ header {
     }
   }
 }
-.package__pricing__hourly-container {
+/* .package__pricing__hourly-container {
   display: flex;
   gap: 1rem;
   justify-content: start;
@@ -1232,7 +1268,7 @@ header {
   h5 {
     font-weight: 300;
   }
-}
+} */
 .package__discount {
   width: 30rem;
   text-align: center;
