@@ -1433,6 +1433,134 @@ header {
 .testimonial__right-block.single-track .testimonial__review__col {
   width: 100%;
 }
+
+/* FAQ Section */
+.faq__section {
+  display: flex;
+  flex-direction: column;
+  padding: 6.4rem 13.5rem;
+  justify-content: space-between;
+  background-color: var(--dark);
+  gap: 3.2rem;
+  .faq__content-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 1.6rem;
+    .faq__conent-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    p {
+      font-size: var(--font-size-body-md);
+      line-height: var(--font-line-height-md);
+      color: rgba(255, 255, 255, 0.6);
+      text-align: center;
+      width: 80%;
+    }
+  }
+  
+.accordion .accordion-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.accordion .accordion-item button[aria-expanded='true'] {
+  border-bottom: 1px solid var(--primary-color);
+}
+
+.accordion button {
+  position: relative;
+  display: flex;
+  text-align: left;
+  width: 100%;
+  padding: 1rem 0rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: var(--font-size-body-md);
+  line-height: var(--font-line-height-md);
+  font-family: var(--font-family-body);
+  /* font-weight: var(--font-weight-bold); */
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.accordion button:hover,
+.accordion button:focus {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.accordion button:hover::after,
+.accordion button:focus::after {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* .accordion button .accordion-title {
+  padding: 1em 1.5em 1em 0;
+} */
+
+.accordion button .icon {
+  display: inline-block;
+  position: absolute;
+  /* top: 18px; */
+  right: 0;
+  width: 22px;
+  height: 22px;
+  border: 1px solid;
+  border-radius: 22px;
+}
+
+.accordion button .icon::before {
+  display: block;
+  position: absolute;
+  content: '';
+  top: 9px;
+  left: 5px;
+  width: 10px;
+  height: 2px;
+  background: currentColor;
+}
+.accordion button .icon::after {
+  display: block;
+  position: absolute;
+  content: '';
+  top: 5px;
+  left: 9px;
+  width: 2px;
+  height: 10px;
+  background: currentColor;
+}
+
+.accordion button[aria-expanded='true'] {
+  color: var(--primary-color);
+}
+.accordion button[aria-expanded='true'] .icon::after {
+  width: 0;
+}
+.accordion button[aria-expanded='true'] + .accordion-content {
+  opacity: 1;
+  max-height: 100vh;
+  transition: all 200ms linear;
+  will-change: opacity, max-height;
+}
+.accordion .accordion-content {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 200ms linear, max-height 200ms linear;
+  will-change: opacity, max-height;
+}
+.accordion .accordion-content p {
+  font-size: var(--font-size-body-sm);
+  line-height: var(--font-line-height-sm);
+  font-weight: 300;
+  margin: 1.4rem 0rem;
+}
+}
+
 /* Final CTA */
 .final-cta__section {
   background: #0e0e0e;
@@ -1689,6 +1817,7 @@ footer {
   #work,
   #pricing,
   #testimonial,
+  #faq,
   #call,
   footer {
     padding: 6.4rem;

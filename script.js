@@ -284,9 +284,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!wrap || !col1 || !col2) return;
 
   const MQ = window.matchMedia("(max-width: 960px)");
-  const speed = 40;               // px/sec
+  const speed = 40; // px/sec
   let mode = MQ.matches ? "single" : "dual";
-  let runToken = 0;               // cancels in-flight loops on mode switch
+  let runToken = 0; // cancels in-flight loops on mode switch
 
   // --- helpers ---
   function duplicateChildren(col) {
@@ -302,7 +302,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function resetTransforms() {
-    [col1, col2].forEach(c => (c.style.transform = "translateY(0)"));
+    [col1, col2].forEach((c) => (c.style.transform = "translateY(0)"));
   }
 
   // --- continuous loop (for dual mode) ---
@@ -315,7 +315,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function step(now) {
       if (token !== runToken || mode !== "dual") return; // aborted
-      const dt = (now - last) / 1000; last = now;
+      const dt = (now - last) / 1000;
+      last = now;
       offset += speed * dt * dir;
       col.style.transform = `translateY(${offset}px)`;
       if (Math.abs(offset) >= origH) offset %= origH;
@@ -332,10 +333,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let last = performance.now();
     let offset = 0;
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       function step(now) {
         if (token !== runToken || mode !== "single") return resolve(); // aborted
-        const dt = (now - last) / 1000; last = now;
+        const dt = (now - last) / 1000;
+        last = now;
         offset += speed * dt * dir;
         col.style.transform = `translateY(${offset}px)`;
         if (Math.abs(offset) >= origH) {
@@ -352,7 +354,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- layout toggles for single-track overlay ---
   function setOverlay(activeCol) {
     wrap.classList.add("single-track");
-    [col1, col2].forEach(c => {
+    [col1, col2].forEach((c) => {
       c.style.position = "absolute";
       c.style.inset = "0";
       c.style.opacity = c === activeCol ? "1" : "0";
@@ -361,7 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   function clearOverlay() {
     wrap.classList.remove("single-track");
-    [col1, col2].forEach(c => {
+    [col1, col2].forEach((c) => {
       c.style.position = "";
       c.style.inset = "";
       c.style.opacity = "";
@@ -402,3 +404,22 @@ document.addEventListener("DOMContentLoaded", () => {
   else MQ.addListener(applyMode); // Safari fallback
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const accordionItemsFaq = document.querySelectorAll(".accordion button");
+
+  function toggleAccordion() {
+    const itemToggle = this.getAttribute("aria-expanded");
+
+    for (let i = 0; i < accordionItemsFaq.length; i++) {
+      accordionItemsFaq[i].setAttribute("aria-expanded", "false");
+    }
+
+    if (itemToggle == "false") {
+      this.setAttribute("aria-expanded", "true");
+    }
+  }
+
+  accordionItemsFaq.forEach((item) =>
+    item.addEventListener("click", toggleAccordion)
+  );
+});
