@@ -276,41 +276,129 @@ window.addEventListener("resize", updateNavBtnText);
 // updateCountdown(); // initial render
 
 // Testimonials animation
+// Testimonials animation (dual above 960px, sequential below)
 document.addEventListener("DOMContentLoaded", () => {
-function initVerticalLoop(col, direction = "down", speed = 40) {
-  if (col.dataset.loopInit) return;
-  col.dataset.loopInit = "1";
+  const wrap = document.querySelector(".testimonial__right-block");
+  const col1 = document.querySelector(".review-col-1");
+  const col2 = document.querySelector(".review-col-2");
+  if (!wrap || !col1 || !col2) return;
 
-  const originalHeight = col.scrollHeight;      // measure BEFORE duplicating
-  col.insertAdjacentHTML("beforeend", col.innerHTML); // duplicate children
-  col.style.willChange = "transform";
+  const MQ = window.matchMedia("(max-width: 960px)");
+  const speed = 40;               // px/sec
+  let mode = MQ.matches ? "single" : "dual";
+  let runToken = 0;               // cancels in-flight loops on mode switch
 
-  const dir = direction === "down" ? 1 : -1;    // +1 = down, -1 = up
-  let last = performance.now();
-  let offset = 0;
-
-  function step(now) {
-    const dt = (now - last) / 1000;
-    last = now;
-
-    offset += speed * dt * dir;
-    col.style.transform = `translateY(${offset}px)`; // sign handled via dir
-
-    // wrap seamlessly after one original-height distance
-    if (Math.abs(offset) >= originalHeight) {
-      offset %= originalHeight; // keep remainder to avoid a visual jump
+  // --- helpers ---
+  function duplicateChildren(col) {
+    // Duplicate children once, store original height before duplication
+    if (!col.dataset.duped) {
+      const h = col.scrollHeight;
+      col.dataset.origH = String(h);
+      col.insertAdjacentHTML("beforeend", col.innerHTML);
+      col.dataset.duped = "1";
+      col.style.willChange = "transform";
     }
+    return Number(col.dataset.origH) || Math.max(1, col.scrollHeight / 2);
+  }
 
+  function resetTransforms() {
+    [col1, col2].forEach(c => (c.style.transform = "translateY(0)"));
+  }
+
+  // --- continuous loop (for dual mode) ---
+  function startContinuous(col, direction) {
+    const token = runToken;
+    const origH = duplicateChildren(col);
+    const dir = direction === "down" ? 1 : -1;
+    let last = performance.now();
+    let offset = 0;
+
+    function step(now) {
+      if (token !== runToken || mode !== "dual") return; // aborted
+      const dt = (now - last) / 1000; last = now;
+      offset += speed * dt * dir;
+      col.style.transform = `translateY(${offset}px)`;
+      if (Math.abs(offset) >= origH) offset %= origH;
+      requestAnimationFrame(step);
+    }
     requestAnimationFrame(step);
   }
 
-  requestAnimationFrame(step);
-}
+  // --- one full cycle (for single mode) ---
+  function animateOneCycle(col, direction) {
+    const token = runToken;
+    const origH = duplicateChildren(col);
+    const dir = direction === "down" ? 1 : -1;
+    let last = performance.now();
+    let offset = 0;
 
+    return new Promise(resolve => {
+      function step(now) {
+        if (token !== runToken || mode !== "single") return resolve(); // aborted
+        const dt = (now - last) / 1000; last = now;
+        offset += speed * dt * dir;
+        col.style.transform = `translateY(${offset}px)`;
+        if (Math.abs(offset) >= origH) {
+          col.style.transform = "translateY(0)"; // reset for next time
+          resolve();
+          return;
+        }
+        requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
 
-  const col1 = document.querySelector(".review-col-1");
-  const col2 = document.querySelector(".review-col-2");
+  // --- layout toggles for single-track overlay ---
+  function setOverlay(activeCol) {
+    wrap.classList.add("single-track");
+    [col1, col2].forEach(c => {
+      c.style.position = "absolute";
+      c.style.inset = "0";
+      c.style.opacity = c === activeCol ? "1" : "0";
+      c.style.pointerEvents = c === activeCol ? "auto" : "none";
+    });
+  }
+  function clearOverlay() {
+    wrap.classList.remove("single-track");
+    [col1, col2].forEach(c => {
+      c.style.position = "";
+      c.style.inset = "";
+      c.style.opacity = "";
+      c.style.pointerEvents = "";
+    });
+  }
 
-  if (col1) initVerticalLoop(col1, "down", 40);
-  if (col2) initVerticalLoop(col2, "up", 40);
+  // --- mode runners ---
+  async function runSingle() {
+    runToken++; // cancel previous
+    const myToken = runToken;
+    resetTransforms();
+    while (mode === "single" && myToken === runToken) {
+      setOverlay(col1);
+      await animateOneCycle(col1, "down");
+      if (mode !== "single" || myToken !== runToken) break;
+      setOverlay(col2);
+      await animateOneCycle(col2, "up");
+    }
+  }
+
+  function runDual() {
+    runToken++; // cancel previous
+    resetTransforms();
+    clearOverlay();
+    startContinuous(col1, "down");
+    startContinuous(col2, "up");
+  }
+
+  function applyMode() {
+    mode = MQ.matches ? "single" : "dual";
+    MQ.matches ? runSingle() : runDual();
+  }
+
+  // init + listen for resizes
+  applyMode();
+  if (MQ.addEventListener) MQ.addEventListener("change", applyMode);
+  else MQ.addListener(applyMode); // Safari fallback
 });
+

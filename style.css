@@ -1426,6 +1426,13 @@ header {
     }
   }
 }
+/* overlay both columns when JS switches to single-track */
+.testimonial__right-block.single-track {
+  position: relative;
+}
+.testimonial__right-block.single-track .testimonial__review__col {
+  width: 100%;
+}
 /* Final CTA */
 .final-cta__section {
   background: #0e0e0e;
@@ -1681,6 +1688,7 @@ footer {
   #process,
   #work,
   #pricing,
+  #testimonial,
   #call,
   footer {
     padding: 6.4rem;
@@ -1763,6 +1771,15 @@ footer {
   }
   .package__section .package__pricing-cards-container {
     gap: 1.4rem;
+  }
+  .testimonial__section .testimonial__right-block {
+    flex-direction: column  ;
+    .review-col-1 {
+      justify-content: end;
+    }
+    .review-col-2 {
+      justify-content: start;
+    }
   }
   .call__section .call__content-container {
     padding: 0rem;
@@ -2059,6 +2076,26 @@ footer {
           bottom: 1.5rem;
         }
       }
+    }
+  }
+  .testimonial__section {
+    flex-direction: column;
+    padding: 3.2rem;
+    gap: 4.8rem;
+    align-items: center;
+    .testimonial__left-block {
+      gap: 1.6rem;
+      max-width: unset;
+      align-items: center;
+      .testimonial__text-container {
+        gap: 1.2rem;
+        h1, p {
+          text-align: center;
+        }
+      } 
+    }
+    .testimonial__right-block {
+      width: 100%;
     }
   }
   .final-cta__section .final-cta__inner-section {
