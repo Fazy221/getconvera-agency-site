@@ -237,40 +237,80 @@ function updateNavBtnText() {
 window.addEventListener("DOMContentLoaded", updateNavBtnText);
 window.addEventListener("resize", updateNavBtnText);
 
-// Set countdown duration (in seconds)
-const countdownSpan = document.getElementById("countdown-timer");
-const TIMER_DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours
+// // Set countdown duration (in seconds)
+// const countdownSpan = document.getElementById("countdown-timer");
+// const TIMER_DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours
 
-// Step 1: Get or Set Countdown End Time in localStorage
-let endTime = localStorage.getItem("countdownEndTime");
+// // Step 1: Get or Set Countdown End Time in localStorage
+// let endTime = localStorage.getItem("countdownEndTime");
 
-if (!endTime || new Date(endTime) <= new Date()) {
-  const newEndTime = new Date(Date.now() + TIMER_DURATION_MS);
-  localStorage.setItem("countdownEndTime", newEndTime.toISOString());
-  endTime = newEndTime;
-} else {
-  endTime = new Date(endTime);
-}
+// if (!endTime || new Date(endTime) <= new Date()) {
+//   const newEndTime = new Date(Date.now() + TIMER_DURATION_MS);
+//   localStorage.setItem("countdownEndTime", newEndTime.toISOString());
+//   endTime = newEndTime;
+// } else {
+//   endTime = new Date(endTime);
+// }
 
-// Step 2: Start Timer Logic
-function updateCountdown() {
-  const now = new Date();
-  const diff = endTime - now;
+// // Step 2: Start Timer Logic
+// function updateCountdown() {
+//   const now = new Date();
+//   const diff = endTime - now;
 
-  if (diff <= 0) {
-    countdownSpan.textContent = "00:00:00";
-    clearInterval(timerInterval);
-    // Optional: reset timer if you want another round
-    // localStorage.removeItem('countdownEndTime');
-    return;
+//   if (diff <= 0) {
+//     countdownSpan.textContent = "00:00:00";
+//     clearInterval(timerInterval);
+//     // Optional: reset timer if you want another round
+//     // localStorage.removeItem('countdownEndTime');
+//     return;
+//   }
+
+//   const hours = String(Math.floor(diff / 1000 / 60 / 60)).padStart(2, "0");
+//   const minutes = String(Math.floor((diff / 1000 / 60) % 60)).padStart(2, "0");
+//   const seconds = String(Math.floor((diff / 1000) % 60)).padStart(2, "0");
+
+//   countdownSpan.textContent = `${hours}:${minutes}:${seconds}`;
+// }
+
+// const timerInterval = setInterval(updateCountdown, 1000);
+// updateCountdown(); // initial render
+
+// Testimonials animation
+document.addEventListener("DOMContentLoaded", () => {
+function initVerticalLoop(col, direction = "down", speed = 40) {
+  if (col.dataset.loopInit) return;
+  col.dataset.loopInit = "1";
+
+  const originalHeight = col.scrollHeight;      // measure BEFORE duplicating
+  col.insertAdjacentHTML("beforeend", col.innerHTML); // duplicate children
+  col.style.willChange = "transform";
+
+  const dir = direction === "down" ? 1 : -1;    // +1 = down, -1 = up
+  let last = performance.now();
+  let offset = 0;
+
+  function step(now) {
+    const dt = (now - last) / 1000;
+    last = now;
+
+    offset += speed * dt * dir;
+    col.style.transform = `translateY(${offset}px)`; // sign handled via dir
+
+    // wrap seamlessly after one original-height distance
+    if (Math.abs(offset) >= originalHeight) {
+      offset %= originalHeight; // keep remainder to avoid a visual jump
+    }
+
+    requestAnimationFrame(step);
   }
 
-  const hours = String(Math.floor(diff / 1000 / 60 / 60)).padStart(2, "0");
-  const minutes = String(Math.floor((diff / 1000 / 60) % 60)).padStart(2, "0");
-  const seconds = String(Math.floor((diff / 1000) % 60)).padStart(2, "0");
-
-  countdownSpan.textContent = `${hours}:${minutes}:${seconds}`;
+  requestAnimationFrame(step);
 }
 
-const timerInterval = setInterval(updateCountdown, 1000);
-updateCountdown(); // initial render
+
+  const col1 = document.querySelector(".review-col-1");
+  const col2 = document.querySelector(".review-col-2");
+
+  if (col1) initVerticalLoop(col1, "down", 40);
+  if (col2) initVerticalLoop(col2, "up", 40);
+});
