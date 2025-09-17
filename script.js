@@ -77,7 +77,7 @@ window.addEventListener("scroll", () => {
 
         io.unobserve(el);
       }),
-    { threshold: 0.2, rootMargin: "0px 0px -10% 0px" } // tiny pre-load bump
+    { threshold: 0.15, rootMargin: "0px 0px -5% 0px" } // tiny pre-load bump
   );
 
   document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
