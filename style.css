@@ -1271,6 +1271,9 @@ main {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  .testimonial__review__col review-col-1 {
+    will-change: auto;
+  }
 }
 .testimonial__right-block::before,
 .testimonial__right-block::after {
@@ -1316,7 +1319,7 @@ main {
     .testimonial__star__wrapper {
       display: flex;
       width: 9.7rem;
-      height: 1.8rem;
+      /* height: 1.8rem; */
       img {
         width: 100%;
         height: 100%;
@@ -1489,12 +1492,6 @@ footer {
     text-align: center;
   }
 }
-@supports (-webkit-touch-callout: none) {
-  .final-cta__inner-section::after {
-    /* if you still see clipping on certain iPhones, un-round on iOS only: */
-    border-radius: 0;
-  }
-}
 @media screen and (max-width: 1200px) {
   html {
     font-size: 56.5%;
@@ -1520,6 +1517,7 @@ footer {
 
   .hero__partners-strip {
     width: 100%;
+    will-change: transform;
   }
 }
 

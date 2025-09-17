@@ -285,23 +285,3 @@ document.addEventListener("DOMContentLoaded", () => {
   if (MQ.addEventListener) MQ.addEventListener("change", applyMode);
   else MQ.addListener(applyMode); // Safari fallback
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-  const accordionItemsFaq = document.querySelectorAll(".accordion button");
-
-  function toggleAccordion() {
-    const itemToggle = this.getAttribute("aria-expanded");
-
-    for (let i = 0; i < accordionItemsFaq.length; i++) {
-      accordionItemsFaq[i].setAttribute("aria-expanded", "false");
-    }
-
-    if (itemToggle == "false") {
-      this.setAttribute("aria-expanded", "true");
-    }
-  }
-
-  accordionItemsFaq.forEach((item) =>
-    item.addEventListener("click", toggleAccordion)
-  );
-});
