@@ -14,6 +14,16 @@ html,
 body {
   overscroll-behavior: none;
 }
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("./assets/fonts/BricolageGrotesque-VariableFont_opsz,wdth,wght.woff2")
+      format("woff2"),
+    url("./assets/fonts/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf")
+      format("truetype");
+  font-weight: 200 800;
+  font-display: swap;
+}
+
 :root {
   /* Color Scheme */
   --primary-color: #2474ff;
@@ -103,7 +113,7 @@ h4,
 h5,
 h6 {
   font-family: var(--font-family-heading);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
   line-height: var(--line-height-heading);
   color: var(--light);
 }
