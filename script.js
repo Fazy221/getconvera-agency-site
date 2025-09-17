@@ -106,90 +106,12 @@ const observer = new IntersectionObserver(
 
 sections.forEach((section) => observer.observe(section));
 
-// Function to load the video when it enters the viewport
-document.addEventListener("DOMContentLoaded", function () {
-  function loadVideoOnScroll(entries, observer) {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const video = entry.target;
-        const webmSource = video.getAttribute("data-src-webm");
-        const mp4Source = video.getAttribute("data-src-mp4");
-
-        // Create a WebM source element if supported
-        const webmElement = document.createElement("source");
-        webmElement.src = webmSource;
-        webmElement.type = "video/webm";
-        video.appendChild(webmElement); // Append WebM source to the video
-
-        // Create a MP4 source element as fallback
-        const mp4Element = document.createElement("source");
-        mp4Element.src = mp4Source;
-        mp4Element.type = "video/mp4";
-        video.appendChild(mp4Element); // Append MP4 source to the video
-
-        // Remove the lazy-loaded video container and start the video
-        video.load();
-        observer.unobserve(video); // Stop observing once the video is loaded
-      }
-    });
-  }
-
-  // IntersectionObserver setup for lazy loading
-  const observer = new IntersectionObserver(loadVideoOnScroll, {
-    rootMargin: "0px 0px -50% 0px", // Trigger when 50% of the video is visible
-  });
-
-  // Observe the video container
-  const videoContainers = document.querySelectorAll(".hero__video-bg");
-  videoContainers.forEach((container) => observer.observe(container));
-});
-
 // Scroll to call section from hero btn
 document.querySelectorAll("[data-scroll-to]").forEach((btn) => {
   btn.addEventListener("click", (e) => {
     e.preventDefault();
     const targetSelector = btn.getAttribute("data-scroll-to");
     smoothScrollTo(targetSelector, 1200, 70); // adjust duration & offset if needed
-  });
-});
-
-// === Brand Selector Logic ===
-document.addEventListener("DOMContentLoaded", () => {
-  const brandItems = document.querySelectorAll(".hero__target-brand");
-  const brandImage = document.getElementById("brand-preview-img");
-  const spinner = document.getElementById("brand-spinner");
-
-  let activeBrand = null;
-
-  brandItems.forEach((item, index) => {
-    item.addEventListener("click", () => {
-      // If already selected, don't re-trigger
-      if (item === activeBrand) return;
-
-      // Remove active class
-      if (activeBrand) activeBrand.classList.remove("active");
-
-      item.classList.add("active");
-      activeBrand = item;
-
-      // Show spinner
-      spinner.style.display = "flex";
-
-      const tempImg = new Image();
-      const newSrc = `./assets/hero__target__brand-detail_img-${index + 1}.png`;
-
-      tempImg.src = newSrc;
-
-      tempImg.onload = () => {
-        brandImage.src = newSrc;
-        brandImage.alt = item.innerText.trim();
-
-        // Small delay to simulate smooth transition
-        setTimeout(() => {
-          spinner.style.display = "none";
-        }, 200); // Optional
-      };
-    });
   });
 });
 
@@ -237,46 +159,6 @@ function updateNavBtnText() {
 window.addEventListener("DOMContentLoaded", updateNavBtnText);
 window.addEventListener("resize", updateNavBtnText);
 
-// // Set countdown duration (in seconds)
-// const countdownSpan = document.getElementById("countdown-timer");
-// const TIMER_DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours
-
-// // Step 1: Get or Set Countdown End Time in localStorage
-// let endTime = localStorage.getItem("countdownEndTime");
-
-// if (!endTime || new Date(endTime) <= new Date()) {
-//   const newEndTime = new Date(Date.now() + TIMER_DURATION_MS);
-//   localStorage.setItem("countdownEndTime", newEndTime.toISOString());
-//   endTime = newEndTime;
-// } else {
-//   endTime = new Date(endTime);
-// }
-
-// // Step 2: Start Timer Logic
-// function updateCountdown() {
-//   const now = new Date();
-//   const diff = endTime - now;
-
-//   if (diff <= 0) {
-//     countdownSpan.textContent = "00:00:00";
-//     clearInterval(timerInterval);
-//     // Optional: reset timer if you want another round
-//     // localStorage.removeItem('countdownEndTime');
-//     return;
-//   }
-
-//   const hours = String(Math.floor(diff / 1000 / 60 / 60)).padStart(2, "0");
-//   const minutes = String(Math.floor((diff / 1000 / 60) % 60)).padStart(2, "0");
-//   const seconds = String(Math.floor((diff / 1000) % 60)).padStart(2, "0");
-
-//   countdownSpan.textContent = `${hours}:${minutes}:${seconds}`;
-// }
-
-// const timerInterval = setInterval(updateCountdown, 1000);
-// updateCountdown(); // initial render
-
-// Testimonials animation
-// Testimonials animation (dual above 960px, sequential below)
 document.addEventListener("DOMContentLoaded", () => {
   const wrap = document.querySelector(".testimonial__right-block");
   const col1 = document.querySelector(".review-col-1");
