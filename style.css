@@ -279,7 +279,7 @@ main {
 /* ---- Hero Section ---- */
 
 .hero__section {
-  padding: 17rem 8rem 30rem;
+  padding: 19rem 8rem 30rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1723,11 +1723,14 @@ footer {
   #before-after {
     overflow: unset;
   }
-  .before-after__mockups-container img {
-    width: 29.9rem;
-    object-fit: contain;
-    flex-shrink: 0;
-    height: 60rem;
+  .before-after__mockups-container {
+    gap: 2rem;
+    img {
+      width: 19.9rem;
+      object-fit: contain;
+      flex-shrink: 0;
+      height: 60rem;
+    }
   }
   #growth {
     padding: 3.2rem 0rem;
