@@ -1727,13 +1727,20 @@ footer {
       }
     }
   }
+  .hero__section {
+    padding: 19rem 1.6rem;
+  }
   .hero__section h1 {
     font-size: var(--font-size-h2);
   }
+  .before-after__mockups-container {
+    animation: none !important;
+  }
   #before-after {
     overflow: unset;
+    display: none;
   }
-  .before-after__mockups-container {
+  /* .before-after__mockups-container {
     gap: 2rem;
     img {
       width: 19.9rem;
@@ -1741,7 +1748,7 @@ footer {
       flex-shrink: 0;
       height: 60rem;
     }
-  }
+  } */
   #growth {
     padding: 3.2rem 0rem;
   }
