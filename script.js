@@ -155,7 +155,7 @@ function updateNavBtnText() {
   }
 }
 
-// Run on load and on resize
+// Testimonial Run on load and on resize
 window.addEventListener("DOMContentLoaded", updateNavBtnText);
 window.addEventListener("resize", updateNavBtnText);
 
