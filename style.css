@@ -411,18 +411,16 @@ main {
 .before-after__mockups-container {
   display: flex;
   /* gap: 2rem; */
-  animation: scroll-before-after 40s linear infinite;
+  /* animation: scroll-before-after 40s linear infinite; */
+  /* transition: animation-duration 0.5s ease; */
   width: max-content;
+  will-change: transform;
 }
 
 .before-after__mockups-container img {
   width: 29.9rem;
   object-fit: contain;
   flex-shrink: 0;
-}
-
-.before-after__mockups-wrapper:hover .before-after__mockups-container {
-  animation-play-state: paused;
 }
 
 /* Animation */
@@ -497,8 +495,8 @@ main {
     gap: 1.6rem;
     border-radius: 2rem;
     .optimize__block-img__container {
-      width: 11.6rem;
-      height: 11.6rem;
+      width: 8rem;
+      height: 8rem;
       border-radius: 100rem;
       overflow: hidden;
       img {

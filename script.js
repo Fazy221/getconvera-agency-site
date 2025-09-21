@@ -155,6 +155,40 @@ function updateNavBtnText() {
   }
 }
 
+// Before After Hover
+const wrapper = document.querySelector(".before-after__mockups-wrapper");
+const container = document.querySelector(".before-after__mockups-container");
+
+let pos = 0;
+let speed = 3; // ✅ default speed in px/frame (tweak this!)
+let targetSpeed = speed;
+
+function animate() {
+  pos -= speed;
+  container.style.transform = `translateX(${pos}px)`;
+
+  // ease toward target speed
+  speed += (targetSpeed - speed) * 0.05;
+
+  // reset for infinite scroll
+  if (Math.abs(pos) > container.scrollWidth / 2) {
+    pos = 0;
+  }
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+// Hover → slow down (but not stop)
+wrapper.addEventListener("mouseenter", () => {
+  targetSpeed = 1; // slower, but still moving
+});
+
+wrapper.addEventListener("mouseleave", () => {
+  targetSpeed = 3; // back to normal
+});
+
 // Testimonial Run on load and on resize
 window.addEventListener("DOMContentLoaded", updateNavBtnText);
 window.addEventListener("resize", updateNavBtnText);
