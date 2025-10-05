@@ -335,6 +335,7 @@ main {
     font-weight: 400;
     max-width: 880px;
     text-align: center;
+    text-wrap: balance;
     font-size: 72px;
   }
   p {
@@ -441,7 +442,7 @@ main {
   background-color: var(--light);
   align-items: center;
   h1:first-child {
-    width: 80rem;
+    width: 90rem;
     text-align: center;
     color: var(--dark);
   }
